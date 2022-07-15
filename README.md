@@ -1,4 +1,147 @@
-# Demo BPF applications
+# ===概览===
+> [!TIP] 概述
+- libbpf-bootstrap : libbpf游乐场,独立的编译环境,与内核关联不大
+
+> [!TIP] 日程
+- 加入libbpf-bootstrap学习大家庭;注意分支开发
+
+# libbpf-bootstrap:快速上手libbpf
+- 注意当前git项目存在子项目;下载完之后需要更新子项目
+- 详情参见:[README](https://github.com/aixiaodeshisan/libbpf-bootstrap)
+```shell
+### 下载：https://github.91chi.fun/https://github.com/libbpf/libbpf-bootstrap.git
+$ git clone https://github.91chi.fun/https://github.com/libbpf/libbpf-bootstrap.git
+Cloning into 'libbpf-bootstrap'...
+remote: Enumerating objects: 417, done.
+remote: Counting objects: 100% (49/49), done.
+remote: Compressing objects: 100% (36/36), done.
+remote: Total 417 (delta 16), reused 30 (delta 13), pack-reused 368
+Receiving objects: 100% (417/417), 2.60 MiB | 2.49 MiB/s, done.
+Resolving deltas: 100% (185/185), done.
+$ tree -d libbpf-bootstrap/
+libbpf-bootstrap/
+├── blazesym
+├── bpftool
+├── examples
+│   ├── c
+│   └── rust
+│       ├── profile
+│       │   └── src
+│       │       └── bpf
+│       ├── tracecon
+│       │   └── src
+│       │       └── bpf
+│       └── xdp
+│           └── src
+│               └── bpf
+├── libbpf # 1.捆绑libbpf作为子目录中的子模块，以避免取决于全系统的libbpf可用性和版本;
+├── tools
+│   └── cmake
+└── vmlinux
+    ├── arm64
+    └── x86
+### 继续下载： git submodule update --init --recursive 
+	### 注意需要设置忽略文件,不要加入某些文件到版本管理中
+### 卡主不动,先git pull,再执行如下;可能网速会有影响
+$  git submodule update --init --recursive 
+Submodule 'blazesym' (https://github.com/libbpf/blazesym.git) registered for path 'blazesym'
+Submodule 'bpftool' (https://github.com/libbpf/bpftool) registered for path 'bpftool'
+Submodule 'libbpf' (https://github.com/libbpf/libbpf.git) registered for path 'libbpf'
+Cloning into '/home/zhangjinfeng/linux-5.10/samples/bpf_demo/libbpf-bootstrap/blazesym'...
+Cloning into '/home/zhangjinfeng/linux-5.10/samples/bpf_demo/libbpf-bootstrap/bpftool'...
+Cloning into '/home/zhangjinfeng/linux-5.10/samples/bpf_demo/libbpf-bootstrap/libbpf'...
+
+### 下载后
+$ tree -d 
+.
+├── blazesym
+│   ├── examples
+│   ├── scripts
+│   └── src
+├── bpftool
+│   ├── bash-completion
+│   ├── docs
+│   ├── include
+│   │   ├── linux
+│   │   └── uapi
+│   │       ├── asm-generic
+│   │       └── linux
+│   │           └── tc_act
+│   ├── libbpf
+│   │   ├── docs
+│   │   │   └── sphinx
+│   │   │       └── doxygen
+│   │   ├── fuzz
+│   │   ├── include
+│   │   │   ├── asm
+│   │   │   ├── linux
+│   │   │   └── uapi
+│   │   │       └── linux
+│   │   ├── scripts
+│   │   ├── src
+│   │   └── travis-ci
+│   │       ├── diffs
+│   │       ├── managers
+│   │       ├── rootfs
+│   │       │   └── s390x-self-hosted-builder
+│   │       │       └── fs
+│   │       │           └── usr
+│   │       │               └── bin
+│   │       └── vmtest
+│   │           └── configs
+│   │               ├── blacklist
+│   │               └── whitelist
+│   ├── scripts
+│   └── src
+│       ├── kernel
+│       │   └── bpf
+│       └── skeleton
+├── examples
+│   ├── c
+│   └── rust
+│       ├── profile
+│       │   └── src
+│       │       └── bpf
+│       ├── tracecon
+│       │   └── src
+│       │       └── bpf
+│       └── xdp
+│           └── src
+│               └── bpf
+├── libbpf
+│   ├── docs
+│   │   └── sphinx
+│   │       └── doxygen
+│   ├── fuzz
+│   ├── include
+│   │   ├── asm
+│   │   ├── linux
+│   │   └── uapi
+│   │       └── linux
+│   ├── scripts
+│   ├── src
+│   └── travis-ci
+│       ├── diffs
+│       ├── managers
+│       ├── rootfs
+│       │   └── s390x-self-hosted-builder
+│       │       └── fs
+│       │           └── usr
+│       │               └── bin
+│       └── vmtest
+│           └── configs
+│               ├── blacklist
+│               └── whitelist
+├── tools
+│   └── cmake
+└── vmlinux
+    ├── arm64
+    └── x86
+
+
+```
+
+# ===Demo BPF applications===
 
 ## Minimal
 
